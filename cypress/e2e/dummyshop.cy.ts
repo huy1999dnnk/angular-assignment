@@ -46,7 +46,7 @@ describe('DummyShop E2E Tests', () => {
       cy.get('mat-card-title').should('not.be.empty')
       cy.get('mat-card-subtitle').should('contain', '$')
       cy.get('.product-description').should('not.be.empty')
-      cy.get('button[aria-label*="favorite"]').should('be.visible')
+      cy.get('button').contains('Add to Favorites').should('be.visible')
     })
   })
 
@@ -63,14 +63,14 @@ describe('DummyShop E2E Tests', () => {
     
     // Add first product to favorites
     cy.get('.product-card').first().within(() => {
-      cy.get('button[aria-label*="Add to favorites"]').click()
+      cy.get('button').contains('Add to Favorites').click()
     })
     
     // Check favorites badge updated
-    cy.get('button').contains('favorite').should('be.visible')
+    cy.get('button').contains('My Favorites').should('be.visible')
     
     // Navigate to favorites page
-    cy.get('button').contains('favorite').click()
+    cy.get('button').contains('My Favorites').click()
     cy.url().should('include', '/favorites')
     
     // Check favorites page
@@ -79,7 +79,7 @@ describe('DummyShop E2E Tests', () => {
     
     // Remove from favorites
     cy.get('.product-card').first().within(() => {
-      cy.get('button[aria-label="Remove from favorites"]').click()
+      cy.get('button').contains('Remove from Favorites').click()
     })
     
     // Go back to products page
@@ -88,7 +88,7 @@ describe('DummyShop E2E Tests', () => {
     
     // Product should no longer be favorite (check by trying to add it again)
     cy.get('.product-card').first().within(() => {
-      cy.get('button').contains('favorite_border').should('be.visible')
+      cy.get('button').contains('Add to Favorites').should('be.visible')
     })
   })
 
@@ -101,7 +101,7 @@ describe('DummyShop E2E Tests', () => {
     cy.url().should('include', '/products')
     
     // Click logout button
-    cy.get('button').contains('logout').click()
+    cy.get('button').contains('Sign Out').click()
     
     // Should redirect to login page
     cy.url().should('include', '/login')

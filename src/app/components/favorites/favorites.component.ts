@@ -24,7 +24,7 @@ import { Router } from '@angular/router';
   template: `
     <div class="container">
       <div class="header">
-        <button mat-icon-button (click)="goToProducts()" aria-label="Go back to products" class="back-button">
+        <button mat-raised-button (click)="goToProducts()" aria-label="Go back to products" class="back-button">
           Back to list
         </button>
         <h1>My Favorite Products</h1>
@@ -54,11 +54,12 @@ import { Router } from '@angular/router';
               
               <mat-card-actions>
                 <button 
-                  mat-icon-button 
+                  mat-raised-button 
                   color="accent"
                   (click)="toggleFavorite(product)"
+                  class="favorite-button"
                   aria-label="Remove from favorites">
-                  <mat-icon>favorite</mat-icon>
+                  Remove from Favorites
                 </button>
               </mat-card-actions>
             </mat-card>
@@ -163,6 +164,16 @@ import { Router } from '@angular/router';
       margin: 0;
       display: flex;
       justify-content: flex-end;
+    }
+
+    .favorite-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .favorite-button mat-icon {
+      margin: 0;
     }
   `]
 })

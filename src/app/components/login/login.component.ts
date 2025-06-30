@@ -80,7 +80,7 @@ import { Login, AuthState } from '../../state/auth.state';
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #b8a7ac 0%, #764ba2 100%);
       padding: 20px;
     }
 

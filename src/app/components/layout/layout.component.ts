@@ -29,18 +29,21 @@ import { Logout } from '../../state/auth.state';
       <span class="spacer"></span>
       <div class="menu-actions-container">
         <button
-          mat-icon-button
+          mat-raised-button
+          color="accent"
           (click)="goToFavorites()"
           [matBadge]="favoritesCount$ | async"
-          matBadgeColor="accent"
+          matBadgeColor="warn"
+          class="toolbar-button"
           aria-label="Go to favorites">
-          <mat-icon>favorite</mat-icon>
+          My Favorites
         </button>
         <button
-          mat-icon-button
+          mat-raised-button
           (click)="logout()"
+          class="toolbar-button"
           aria-label="Logout">
-          <mat-icon>logout</mat-icon>
+          Sign Out
         </button>
       </div>
     </mat-toolbar>
@@ -57,7 +60,21 @@ import { Logout } from '../../state/auth.state';
     .menu-actions-container {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
+    }
+
+    .toolbar-button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    .toolbar-button mat-icon {
+      margin: 0;
+      font-size: 18px;
+      height: 18px;
+      width: 18px;
     }
 
     .main-content {

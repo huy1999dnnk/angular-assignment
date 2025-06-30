@@ -62,18 +62,20 @@ import { ToggleFavorite } from '../../state/favorites.state';
 
           <mat-card-actions>
             <button
-              mat-icon-button
+              mat-raised-button
               [color]="isFavorite(product.id) ? 'accent' : 'primary'"
               (click)="toggleFavorite(product)"
+              class="favorite-button"
               [attr.aria-label]="
                 isFavorite(product.id)
                   ? 'Remove from favorites'
                   : 'Add to favorites'
               "
             >
-              <mat-icon>{{
-                isFavorite(product.id) ? 'favorite' : 'favorite_border'
-              }}</mat-icon>
+
+              {{
+                isFavorite(product.id) ? 'Remove from Favorites' : 'Add to Favorites'
+              }}
             </button>
           </mat-card-actions>
         </mat-card>
@@ -159,6 +161,16 @@ import { ToggleFavorite } from '../../state/favorites.state';
         margin: 0;
         display: flex;
         justify-content: flex-end;
+      }
+
+      .favorite-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .favorite-button mat-icon {
+        margin: 0;
       }
     `,
   ],
