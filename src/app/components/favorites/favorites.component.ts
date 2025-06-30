@@ -31,7 +31,6 @@ import { Router } from '@angular/router';
       </div>
       @if (displayedFavorites.length === 0) {
         <div class="empty-state">
-          <mat-icon>favorite_border</mat-icon>
           <h2>No favorites yet</h2>
           <p>Start adding products to your favorites from the products page!</p>
         </div>
