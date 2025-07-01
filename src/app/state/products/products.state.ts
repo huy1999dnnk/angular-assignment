@@ -2,28 +2,14 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { ProductService } from '../services/product.service';
-import { Product } from '../models/product.model';
-
-export class LoadProducts {
-  static readonly type = '[Products] Load Products';
-}
-
-export class LoadProductsSuccess {
-  static readonly type = '[Products] Load Products Success';
-  constructor(public products: Product[]) {}
-}
-
-export class LoadProductsFailure {
-  static readonly type = '[Products] Load Products Failure';
-  constructor(public error: string) {}
-}
-
-export interface ProductsStateModel {
-  products: Product[];
-  loading: boolean;
-  error: string | null;
-}
+import { ProductService } from '../../services/product.service';
+import { Product } from '../../models/product.model';
+import { ProductsStateModel } from './products.model';
+import { 
+  LoadProducts, 
+  LoadProductsSuccess, 
+  LoadProductsFailure 
+} from './products.actions';
 
 @State<ProductsStateModel>({
   name: 'products',

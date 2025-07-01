@@ -83,7 +83,7 @@ describe('DummyShop E2E Tests', () => {
     })
     
     // Go back to products page
-    cy.get('button').contains('Back to list').click()
+    cy.get('button').contains('Back to Products').click()
     cy.url().should('include', '/products')
     
     // Product should no longer be favorite (check by trying to add it again)

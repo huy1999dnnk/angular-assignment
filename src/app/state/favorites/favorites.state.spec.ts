@@ -1,7 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { NgxsModule, Store } from '@ngxs/store';
-import { FavoritesState, AddToFavorites, RemoveFromFavorites, ToggleFavorite, ClearFavorites } from './favorites.state';
-import { Product } from '../models/product.model';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { Store, provideStore } from '@ngxs/store';
+import { FavoritesState } from './favorites.state';
+import { AddToFavorites, RemoveFromFavorites, ToggleFavorite, ClearFavorites } from './favorites.actions';
+import { Product } from '../../models/product.model';
 
 describe('FavoritesState', () => {
   let store: Store;
@@ -44,23 +46,26 @@ describe('FavoritesState', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NgxsModule.forRoot([FavoritesState])]
+      providers: [
+        provideZonelessChangeDetection(),
+        provideStore([FavoritesState])
+      ]
     });
 
     store = TestBed.inject(Store);
   });
 
   it('should be created', () => {
-    const state = store.selectSnapshot(FavoritesState);
-    expect(state).toBeDefined();
-    expect(state.favorites).toEqual([]);
+    const favorites = store.selectSnapshot(FavoritesState.favorites);
+    expect(favorites).toBeDefined();
+    expect(favorites).toEqual([]);
   });
 
   it('should add product to favorites', () => {
     store.dispatch(new AddToFavorites(mockProduct1));
     
     const favorites = store.selectSnapshot(FavoritesState.favorites);
-    expect(favorites).toHaveLength(1);
+    expect(favorites.length).toBe(1);
     expect(favorites[0]).toEqual(mockProduct1);
   });
 
@@ -69,7 +74,7 @@ describe('FavoritesState', () => {
     store.dispatch(new AddToFavorites(mockProduct1));
     
     const favorites = store.selectSnapshot(FavoritesState.favorites);
-    expect(favorites).toHaveLength(1);
+    expect(favorites.length).toBe(1);
   });
 
   it('should remove product from favorites', () => {
@@ -78,7 +83,7 @@ describe('FavoritesState', () => {
     store.dispatch(new RemoveFromFavorites(mockProduct1.id));
     
     const favorites = store.selectSnapshot(FavoritesState.favorites);
-    expect(favorites).toHaveLength(1);
+    expect(favorites.length).toBe(1);
     expect(favorites[0]).toEqual(mockProduct2);
   });
 
@@ -86,13 +91,13 @@ describe('FavoritesState', () => {
     // Add product via toggle
     store.dispatch(new ToggleFavorite(mockProduct1));
     let favorites = store.selectSnapshot(FavoritesState.favorites);
-    expect(favorites).toHaveLength(1);
+    expect(favorites.length).toBe(1);
     expect(favorites[0]).toEqual(mockProduct1);
 
     // Remove product via toggle
     store.dispatch(new ToggleFavorite(mockProduct1));
     favorites = store.selectSnapshot(FavoritesState.favorites);
-    expect(favorites).toHaveLength(0);
+    expect(favorites.length).toBe(0);
   });
 
   it('should check if product is favorite', () => {
@@ -117,6 +122,6 @@ describe('FavoritesState', () => {
     store.dispatch(new ClearFavorites());
     
     const favorites = store.selectSnapshot(FavoritesState.favorites);
-    expect(favorites).toHaveLength(0);
+    expect(favorites.length).toBe(0);
   });
 });

@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+  <span>DummyShop</span>
+  <span class="spacer"></span>
+  <div class="menu-actions-container">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="goToFavorites()"
+      [matBadge]="favoritesCount$ | async"
+      matBadgeColor="warn"
+      class="toolbar-button"
+      aria-label="Go to favorites">
+      My Favorites
+    </button>
+    <button
+      mat-raised-button
+      (click)="logout()"
+      class="toolbar-button"
+      aria-label="Logout">
+      Sign Out
+    </button>
+  </div>
+</mat-toolbar>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>

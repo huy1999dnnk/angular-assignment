@@ -2,45 +2,17 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { User, LoginRequest, RefreshTokenRequest } from '../models/auth.model';
-
-export class Login {
-  static readonly type = '[Auth] Login';
-  constructor(public credentials: LoginRequest) {}
-}
-
-export class GetCurrentUser {
-  static readonly type = '[Auth] Get Current User';
-}
-
-export class SetCurrentUser {
-  static readonly type = '[Auth] Set Current User';
-  constructor(public user: User) {}
-}
-
-export class Logout {
-  static readonly type = '[Auth] Logout';
-}
-
-export class RefreshToken {
-  static readonly type = '[Auth] Refresh Token';
-  constructor(public refreshTokenRequest?: RefreshTokenRequest) {}
-}
-
-export class SetTokens {
-  static readonly type = '[Auth] Set Tokens';
-  constructor(public accessToken: string, public refreshToken: string) {}
-}
-
-export interface AuthStateModel {
-  user: User | null;
-  accessToken: string | null;
-  refreshToken: string | null;
-  isLoggedIn: boolean;
-  loading: boolean;
-  error: string | null;
-}
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/auth.model';
+import { AuthStateModel } from './auth.model';
+import { 
+  Login, 
+  GetCurrentUser, 
+  SetCurrentUser, 
+  Logout, 
+  RefreshToken, 
+  SetTokens 
+} from './auth.actions';
 
 @State<AuthStateModel>({
   name: 'auth',

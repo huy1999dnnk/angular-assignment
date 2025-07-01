@@ -53,12 +53,22 @@
     "setupFilesAfterEnv": [
       "<rootDir>/setup-jest.ts"
     ],
+    "testMatch": [
+      "<rootDir>/src/**/*.spec.ts"
+    ],
     "testPathIgnorePatterns": [
-      "<rootDir>/cypress/"
+      "<rootDir>/cypress/",
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/"
     ],
     "moduleNameMapper": {
       "^@app/(.*)$": "<rootDir>/src/app/$1",
       "^@env/(.*)$": "<rootDir>/src/environments/$1"
-    }
+    },
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/**/*.spec.ts",
+      "!src/main.ts"
+    ]
   }
 }

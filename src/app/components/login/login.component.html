@@ -1,0 +1,50 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>DummyShop Login</mat-card-title>
+      <mat-card-subtitle>Please sign in to continue</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" placeholder="Enter username">
+          @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
+            <mat-error>Username is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Enter password">
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <mat-error>Password is required</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="demo-credentials">
+          <h4>Demo Credentials:</h4>
+          <p><strong>Username:</strong> emilys</p>
+          <p><strong>Password:</strong> emilyspass</p>
+        </div>
+
+        <mat-card-actions class="login-actions">
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit" 
+            [disabled]="loginForm.invalid || (loading$ | async)"
+            class="login-button">
+            @if (loading$ | async) {
+              <mat-spinner diameter="20"></mat-spinner>
+              Logging in...
+            } @else {
+              Login
+            }
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

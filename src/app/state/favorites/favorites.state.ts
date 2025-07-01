@@ -1,29 +1,13 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { Product } from '../models/product.model';
-
-export class AddToFavorites {
-  static readonly type = '[Favorites] Add to Favorites';
-  constructor(public product: Product) {}
-}
-
-export class RemoveFromFavorites {
-  static readonly type = '[Favorites] Remove from Favorites';
-  constructor(public productId: number) {}
-}
-
-export class ToggleFavorite {
-  static readonly type = '[Favorites] Toggle Favorite';
-  constructor(public product: Product) {}
-}
-
-export class ClearFavorites {
-  static readonly type = '[Favorites] Clear Favorites';
-}
-
-export interface FavoritesStateModel {
-  favorites: Product[];
-}
+import { Product } from '../../models/product.model';
+import { FavoritesStateModel } from './favorites.model';
+import { 
+  AddToFavorites, 
+  RemoveFromFavorites, 
+  ToggleFavorite, 
+  ClearFavorites 
+} from './favorites.actions';
 
 @State<FavoritesStateModel>({
   name: 'favorites',

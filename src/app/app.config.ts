@@ -7,9 +7,9 @@ import { withNgxsLoggerPlugin } from '@ngxs/logger-plugin';
 import { withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
 
 import { routes } from './app.routes';
-import { AuthState } from './state/auth.state';
-import { FavoritesState } from './state/favorites.state';
-import { ProductsState } from './state/products.state';
+import { AuthState } from './state/auth/auth.state';
+import { FavoritesState } from './state/favorites/favorites.state';
+import { ProductsState } from './state/products/products.state';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {

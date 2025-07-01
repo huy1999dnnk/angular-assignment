@@ -3,7 +3,8 @@ import { CanActivate, Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { AuthState, GetCurrentUser } from '../state/auth.state';
+import { AuthState } from '../state/auth/auth.state';
+import { GetCurrentUser } from '../state/auth/auth.actions';
 
 @Injectable({
   providedIn: 'root'

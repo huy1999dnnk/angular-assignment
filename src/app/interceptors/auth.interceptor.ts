@@ -3,7 +3,8 @@ import { inject } from '@angular/core';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, take, switchMap } from 'rxjs/operators';
 import { Store } from '@ngxs/store';
-import { AuthState, RefreshToken, Logout } from '../state/auth.state';
+import { AuthState } from '../state/auth/auth.state';
+import { RefreshToken, Logout } from '../state/auth/auth.actions';
 
 let isRefreshing = false;
 const refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);

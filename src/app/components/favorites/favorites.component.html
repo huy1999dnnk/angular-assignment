@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="header">
+    <button mat-raised-button (click)="goToProducts()" aria-label="Go back to products" class="back-button">
+      Back to Products
+    </button>
+    <h1>My Favorite Products</h1>
+  </div>
+  @if (favorites$ | async; as favorites) {
+    @if (favorites.length === 0) {
+      <div class="empty-state">
+        <mat-icon class="empty-icon">favorite_border</mat-icon>
+        <h2>No favorites yet</h2>
+        <p>Start adding products to your favorites from the products page!</p>
+        <button mat-raised-button color="primary" (click)="goToProducts()" class="shop-button">
+          Start Shopping
+        </button>
+      </div>
+    } @else {
+      <div class="products-grid">
+        @for (product of favorites; track product.id) {
+          <mat-card class="product-card" appearance="outlined">
+            <div class="product-image-container">
+              <img [src]="product.thumbnail" [alt]="product.title" class="product-image">
+              <div class="product-overlay">
+                <span class="product-category">{{ product.category }}</span>
+              </div>
+            </div>
+            
+            <mat-card-header class="product-header">
+              <mat-card-title class="product-title">{{ product.title }}</mat-card-title>
+              <mat-card-subtitle class="product-price">
+                <span class="price-main">${{ product.price }}</span>
+                @if (product.discountPercentage > 0) {
+                <span class="discount">{{ product.discountPercentage }}% OFF</span>
+                }
+              </mat-card-subtitle>
+            </mat-card-header>
+            
+            <mat-card-content class="product-content">
+              <p class="product-description">{{ product.description }}</p>
+              <div class="product-rating">
+                <mat-icon class="star-icon">star</mat-icon>
+                <span>{{ product.rating }}</span>
+                <span class="stock-info">{{ product.stock }} in stock</span>
+              </div>
+            </mat-card-content>
+            
+            <mat-card-actions class="product-actions">
+              @if (isRemovedFromFavorites(product.id)) {
+                <button 
+                  mat-raised-button 
+                  color="primary"
+                  (click)="toggleFavorite(product)"
+                  class="favorite-button add-favorite"
+                  aria-label="Add to favorites">
+                  Add to Favorites
+                </button>
+              } @else {
+                <button 
+                  mat-raised-button 
+                  color="warn"
+                  (click)="toggleFavorite(product)"
+                  class="favorite-button remove-favorite"
+                  aria-label="Remove from favorites">
+                  Remove from Favorites
+                </button>
+              }
+            </mat-card-actions>
+          </mat-card>
+        }
+      </div>
+    }
+  }
+</div>
