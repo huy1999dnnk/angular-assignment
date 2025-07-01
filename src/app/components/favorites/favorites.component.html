@@ -8,7 +8,6 @@
   @if (favorites$ | async; as favorites) {
     @if (favorites.length === 0) {
       <div class="empty-state">
-        <mat-icon class="empty-icon">favorite_border</mat-icon>
         <h2>No favorites yet</h2>
         <p>Start adding products to your favorites from the products page!</p>
         <button mat-raised-button color="primary" (click)="goToProducts()" class="shop-button">
@@ -39,8 +38,7 @@
             <mat-card-content class="product-content">
               <p class="product-description">{{ product.description }}</p>
               <div class="product-rating">
-                <mat-icon class="star-icon">star</mat-icon>
-                <span>{{ product.rating }}</span>
+                <span>{{ product.rating }} stars</span>
                 <span class="stock-info">{{ product.stock }} in stock</span>
               </div>
             </mat-card-content>
